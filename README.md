@@ -49,6 +49,7 @@ It created the object and then again asked if I wanted to proceed creating other
 When I shared the terminal with deployment failures, it displayed a summary of the errors and how to fix them. Asked to proceed. I had to deploy the custom object one by one. It got the sharing model wrong on the child object.
 
 Component Failures [3]
+```
 ┌──────────────┬───────────────────────────────┬──────────────────┬─────────────┐
 │ Type         │ Name                          │ Problem          │ Line:Column │
 ├──────────────┼───────────────────────────────┼──────────────────┼─────────────┤
@@ -72,6 +73,7 @@ Component Failures [3]
 │              │                               │ type Checkbox    │             │
 │              │                               │ (165:13)         │             │
 └──────────────┴───────────────────────────────┴──────────────────┴─────────────┘
+```
 
 ## Claude - Claude
 
@@ -82,6 +84,7 @@ It did not set up access to the LWC. No way to get to it. Cline didn’t create 
 ### Deployment Failures
 
 Component Failures [21]
+```
 ┌──────────────────────────┬──────────────────────────────────────────────┬─────────┬─────────────┐
 │ Type                     │ Name                                         │ Problem │ Line:Column │
 ├──────────────────────────┼──────────────────────────────────────────────┼─────────┼─────────────┤
@@ -388,10 +391,12 @@ Component Failures [21]
 │                          │                                              │ ngContr │             │
 │                          │                                              │ oller'. │             │
 └──────────────────────────┴──────────────────────────────────────────────┴─────────┴─────────────┘
+```
 
 Another deploy:
 
 Component Failures [2]
+```
 ┌────────────┬─────────────────────────────────────────┬───────────────────────────────────────────┬─────────────┐
 │ Type       │ Name                                    │ Problem                                   │ Line:Column │
 ├────────────┼─────────────────────────────────────────┼───────────────────────────────────────────┼─────────────┤
@@ -400,8 +405,10 @@ Component Failures [2]
 │ Layout     │ Purchase_Order__c-Purchase Order Layout │ Cannot find related                       │             │
 │            │                                         │ list:Purchase_Order_Line_Items__r         │             │
 └────────────┴─────────────────────────────────────────┴───────────────────────────────────────────┴─────────────┘
+```
 
 Component Failures [2]
+```
 ┌────────────┬─────────────────────────────────────────┬───────────────────────────────────────────┬─────────────┐
 │ Type       │ Name                                    │ Problem                                   │ Line:Column │
 ├────────────┼─────────────────────────────────────────┼───────────────────────────────────────────┼─────────────┤
@@ -410,3 +417,4 @@ Component Failures [2]
 │ Layout     │ Purchase_Order__c-Purchase Order Layout │ Cannot find related                       │             │
 │            │                                         │ list:Purchase_Order_Line_Items            │             │
 └────────────┴─────────────────────────────────────────┴───────────────────────────────────────────┴─────────────┘
+```
