@@ -1,9 +1,9 @@
 /**
  * @description       : 
- * @author            : liquidlogixsolutions
+ * @author            : jeffdonthemic
  * @group             : 
- * @last modified on  : 09-03-2025
- * @last modified by  : liquidlogixsolutions
+ * @last modified on  : 09-04-2025
+ * @last modified by  : jeffdonthemic
 **/
 trigger PurchaseOrderLineItemTrigger on PurchaseOrderLineItem__c (after insert, after update) {
     // Map to store ingredient ID and the total quantity received for that ingredient

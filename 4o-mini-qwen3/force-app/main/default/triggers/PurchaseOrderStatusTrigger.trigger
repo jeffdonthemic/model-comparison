@@ -1,9 +1,9 @@
 /**
  * @description       : 
- * @author            : liquidlogixsolutions
+ * @author            : jeffdonthemic
  * @group             : 
- * @last modified on  : 09-02-2025
- * @last modified by  : liquidlogixsolutions
+ * @last modified on  : 09-04-2025
+ * @last modified by  : jeffdonthemic
 **/
 trigger PurchaseOrderStatusTrigger on Purchase_Order_Line_Item__c (after insert, after update) {
     Set<Id> purchaseOrderIds = new Set<Id>();

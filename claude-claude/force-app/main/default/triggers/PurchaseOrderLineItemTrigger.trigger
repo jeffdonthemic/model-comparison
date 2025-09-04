@@ -1,9 +1,9 @@
 /**
  * @description       : Trigger for Purchase Order Line Item automation
- * @author            : liquidlogixsolutions
+ * @author            : jeffdonthemic
  * @group             : 
- * @last modified on  : 09-02-2025
- * @last modified by  : liquidlogixsolutions
+ * @last modified on  : 09-04-2025
+ * @last modified by  : jeffdonthemic
 **/
 trigger PurchaseOrderLineItemTrigger on Purchase_Order_Line_Item__c (after update) {
     if (Trigger.isAfter && Trigger.isUpdate) {
