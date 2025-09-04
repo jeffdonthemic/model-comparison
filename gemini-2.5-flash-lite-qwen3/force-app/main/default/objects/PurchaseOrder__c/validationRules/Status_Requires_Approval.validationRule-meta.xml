@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Requires_Approval</fullName>
+    <active>true</active>
+    <description>PO Status can only be set to 'Ordered' if the PO is approved.</description>
+    <errorConditionFormula>ISPICKVAL(Status__c, "Ordered") &amp;&amp; NOT(Approved__c)</errorConditionFormula>
+    <errorMessage>PO must be approved before it can be ordered.</errorMessage>
+</ValidationRule>

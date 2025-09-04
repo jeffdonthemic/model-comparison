@@ -1,0 +1,107 @@
+<!--
+  @description       : 
+  @author            : liquidlogixsolutions
+  @group             : 
+  @last modified on  : 09-02-2025
+  @last modified by  : liquidlogixsolutions
+-->
+<template>
+    <lightning-card title="Receive Purchase Order Items" icon-name="action:new_task">
+        <div class="slds-p-horizontal_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+            </template>
+            
+            <template if:true={hasLineItems}>
+                <div class="slds-m-bottom_medium">
+                    <p class="slds-text-body_regular">
+                        Update the quantity received for each line item below:
+                    </p>
+                </div>
+                
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="slds-text-title_caps" scope="col">
+                                <div class="slds-truncate" title="Ingredient">Ingredient</div>
+                            </th>
+                            <th class="slds-text-title_caps" scope="col">
+                                <div class="slds-truncate" title="Quantity Ordered">Qty Ordered</div>
+                            </th>
+                            <th class="slds-text-title_caps" scope="col">
+                                <div class="slds-truncate" title="Previously Received">Previously Received</div>
+                            </th>
+                            <th class="slds-text-title_caps" scope="col">
+                                <div class="slds-truncate" title="Quantity to Receive">Qty to Receive</div>
+                            </th>
+                            <th class="slds-text-title_caps" scope="col">
+                                <div class="slds-truncate" title="Unit Price">Unit Price</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={lineItems} for:item="item">
+                            <tr key={item.Id} class="slds-hint-parent">
+                                <td data-label="Ingredient">
+                                    <div class="slds-truncate" title={item.Ingredient__r.Name}>
+                                        {item.Ingredient__r.Name}
+                                    </div>
+                                </td>
+                                <td data-label="Quantity Ordered">
+                                    <div class="slds-truncate">
+                                        {item.Quantity_Ordered__c}
+                                    </div>
+                                </td>
+                                <td data-label="Previously Received">
+                                    <div class="slds-truncate">
+                                        {item.Quantity_Received__c}
+                                    </div>
+                                </td>
+                                <td data-label="Quantity to Receive">
+                                    <lightning-input
+                                        type="number"
+                                        value={item.quantityToReceive}
+                                        data-id={item.Id}
+                                        onchange={handleQuantityChange}
+                                        step="0.01"
+                                        min="0"
+                                        variant="label-hidden">
+                                    </lightning-input>
+                                </td>
+                                <td data-label="Unit Price">
+                                    <div class="slds-truncate">
+                                        <lightning-formatted-number
+                                            value={item.Unit_Price__c}
+                                            format-style="currency">
+                                        </lightning-formatted-number>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            
+            <template if:false={hasLineItems}>
+                <div class="slds-text-align_center slds-p-vertical_large">
+                    <p class="slds-text-body_regular">No line items found for this purchase order.</p>
+                </div>
+            </template>
+        </div>
+        
+        <div slot="footer" class="slds-text-align_right">
+            <lightning-button
+                variant="neutral"
+                label="Cancel"
+                onclick={handleCancel}
+                class="slds-m-right_x-small">
+            </lightning-button>
+            <lightning-button
+                variant="brand"
+                label="Save"
+                onclick={handleSave}
+                disabled={isLoading}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

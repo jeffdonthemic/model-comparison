@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <description>Flow to update PO Status based on line item receipt status</description>
+    <environments>Default</environments>
+    <interviewLabel>PO Status Update Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>PO Status Update Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_If_Quantity_Received_Is_Greater_Than_Zero</targetReference>
+        </connector>
+        <filterFormula>ISCHANGED({!$Record.QuantityReceived__c})</filterFormula>
+        <object>PurchaseOrderLineItem__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <decisions>
+        <name>Check_If_Quantity_Received_Is_Greater_Than_Zero</name>
+        <label>Check If Quantity Received Is Greater Than Zero</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Quantity_Received_Is_Greater_Than_Zero</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.QuantityReceived__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_PO_to_Partially_Received</targetReference>
+            </connector>
+            <label>Quantity Received Is Greater Than Zero</label>
+        </rules>
+    </decisions>
+    <recordUpdates>
+        <description>Update PO to Partially Received</description>
+        <name>Update_PO_to_Partially_Received</name>
+        <label>Update PO to Partially Received</label>
+        <locationX>176</locationX>
+        <locationY>398</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.PurchaseOrder__r.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Partially Received</stringValue>
+            </value>
+        </inputAssignments>
+        <object>PurchaseOrder__c</object>
+    </recordUpdates>
+    <status>Active</status>
+</Flow>

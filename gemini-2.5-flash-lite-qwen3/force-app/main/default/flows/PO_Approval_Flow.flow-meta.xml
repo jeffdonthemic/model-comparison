@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <description>Flow to update PO Status to Approved when Approved checkbox is checked</description>
+    <environments>Default</environments>
+    <interviewLabel>PO Approval Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>PO Approval Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Update PO Status to Approved</description>
+        <name>Update_PO_Status_to_Approved</name>
+        <label>Update PO Status to Approved</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <connector>
+            <targetReference>Check_if_PO_is_Already_Approved</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Approved</stringValue>
+            </value>
+        </inputAssignments>
+        <object>PurchaseOrder__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_if_Approved_is_True</targetReference>
+        </connector>
+        <filterFormula>AND({!$Record.Approved__c}, ISCHANGED({!$Record.Approved__c}))</filterFormula>
+        <object>PurchaseOrder__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <decisions>
+        <description>Check if Approved checkbox is True</description>
+        <name>Check_if_Approved_is_True</name>
+        <label>Check if Approved is True</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Approved_is_True</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Approved__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_PO_Status_to_Approved</targetReference>
+            </connector>
+            <label>Approved is True</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check if PO is already Approved</description>
+        <name>Check_if_PO_is_Already_Approved</name>
+        <label>Check if PO is Already Approved</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>PO_is_Not_Already_Approved</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Approved</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_PO_Status_to_Approved</targetReference>
+            </connector>
+            <label>PO is Not Already Approved</label>
+        </rules>
+    </decisions>
+</Flow>
