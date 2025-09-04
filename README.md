@@ -8,7 +8,9 @@ I built the same version of the application using the following models. I then h
 - GPT 4o min (plan) and Qwen3 Coder (act) – grade F
 - Gemini 2.5 Flash Lite (plan) and Qwen3 Coder (act) – Grade C+
 
-See the file in this repo for an analyzis of each application individually and then a comparison of different applications. 
+## Analysis
+
+👉 See the files in this repo for an analyzis of each application individually and then a comparison of different applications/models. 
 
 ## Prompt
 This is my initial prompt but I tried to respond with the same answers to the models’ questions.
