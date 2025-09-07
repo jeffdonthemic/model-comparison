@@ -1,0 +1,27 @@
+.slds-form-element__static {
+    font-weight: 600;
+}
+
+.slds-text-title_caps {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+    color: #706e6b;
+}
+
+.slds-notify__content h2 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.slds-notify__content p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+lightning-datatable {
+    border: 1px solid #d8dde6;
+    border-radius: 0.25rem;
+}

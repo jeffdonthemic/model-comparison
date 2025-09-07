@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage">
+            <property name="purchaseOrderId" type="String" label="Purchase Order ID" description="The ID of the Purchase Order to display for receiving"/>
+        </targetConfig>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="purchaseOrderId" type="String" label="Purchase Order ID" description="The ID of the Purchase Order to display for receiving" default="{!recordId}"/>
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="purchaseOrderId" type="String" role="inputOnly" label="Purchase Order ID" description="The ID of the Purchase Order to display for receiving"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

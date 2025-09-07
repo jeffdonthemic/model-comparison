@@ -1,0 +1,97 @@
+<template>
+    <lightning-card title="Purchase Order Receiving" icon-name="standard:orders">
+        <div class="slds-m-around_medium">
+            <!-- Purchase Order Information -->
+            <template if:true={purchaseOrder}>
+                <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_medium">
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label slds-text-title_caps">Purchase Order</label>
+                            <div class="slds-form-element__control">
+                                <span class="slds-form-element__static">{purchaseOrderNumber}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label slds-text-title_caps">Supplier</label>
+                            <div class="slds-form-element__control">
+                                <span class="slds-form-element__static">{supplierName}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label slds-text-title_caps">Status</label>
+                            <div class="slds-form-element__control">
+                                <lightning-badge label={orderStatus} variant="inverse"></lightning-badge>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Error Message -->
+            <template if:true={hasErrors}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <lightning-icon icon-name="utility:error" alternative-text="Error" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                    <h2>{errorMessage}</h2>
+                </div>
+            </template>
+
+            <!-- Loading Spinner -->
+            <template if:true={isLoading}>
+                <div class="slds-is-relative slds-m-vertical_large">
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Line Items Data Table -->
+            <template if:true={hasData}>
+                <div class="slds-m-top_medium">
+                    <h3 class="slds-text-heading_small slds-m-bottom_small">Line Items</h3>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={lineItems}
+                        columns={columns}
+                        draft-values={draftValues}
+                        onsave={handleSave}
+                        oncancel={handleCancel}
+                        oncellchange={handleCellChange}
+                        hide-checkbox-column="true"
+                        show-row-number-column="true"
+                        resize-column-disabled="true"
+                        suppress-bottom-bar="false">
+                    </lightning-datatable>
+                </div>
+            </template>
+
+            <!-- No Data Message -->
+            <template if:false={hasData}>
+                <template if:false={hasErrors}>
+                    <template if:false={isLoading}>
+                        <div class="slds-text-align_center slds-m-vertical_large">
+                            <lightning-icon icon-name="utility:info" size="large" class="slds-m-bottom_small"></lightning-icon>
+                            <p class="slds-text-heading_small">No line items found for this purchase order.</p>
+                        </div>
+                    </template>
+                </template>
+            </template>
+
+            <!-- Instructions -->
+            <template if:true={hasData}>
+                <div class="slds-m-top_medium">
+                    <div class="slds-notify slds-notify_toast slds-theme_info" role="status">
+                        <span class="slds-assistive-text">Info</span>
+                        <lightning-icon icon-name="utility:info" alternative-text="Info" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        <div class="slds-notify__content">
+                            <h2 class="slds-text-heading_small">Instructions:</h2>
+                            <p>Click on the "Quantity Received" field to edit. You cannot receive more than the quantity ordered. Click "Save" to update the inventory.</p>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
