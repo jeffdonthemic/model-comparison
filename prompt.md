@@ -1,6 +1,6 @@
-Eval Run ID: claude4-claude4
-Plan Model: Claude Sonnet 4
-Act Model: Claude Sonnet 4
+Eval Run ID: qwen3-qwen3
+Plan Model: Qwen3
+Act Model: Qwen3
 
 You are to generate a complete Salesforce application that implements a purchasing and inventory system for a **commercial baking company**. After reviewing the instructions, analyze the current org structure in the local file system. Ask me any clarifying questions.
 

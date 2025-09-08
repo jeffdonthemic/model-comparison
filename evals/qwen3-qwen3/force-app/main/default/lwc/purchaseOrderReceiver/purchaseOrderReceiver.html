@@ -1,0 +1,69 @@
+<template>
+    <lightning-card title="Purchase Order Receiver" icon-name="custom:custom18">
+        <div class="slds-m-around_medium">
+            <template if:true={purchaseOrder}>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_1-of-2">
+                        <p><strong>Purchase Order:</strong> {purchaseOrder.Name}</p>
+                        <p><strong>Supplier:</strong> {purchaseOrder.Supplier__r.Name}</p>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <p><strong>Status:</strong> {purchaseOrder.Status__c}</p>
+                        <p><strong>Expected Delivery:</strong> {purchaseOrder.Expected_Delivery_Date__c}</p>
+                    </div>
+                </div>
+                
+                <lightning-datatable
+                    key-field="Id"
+                    data={lineItems}
+                    columns={columns}
+                    hide-checkbox-column
+                    oncellchange={handleCellChange}>
+                </lightning-datatable>
+                
+                <div class="slds-m-top_medium">
+                    <lightning-button 
+                        label="Save Receipts" 
+                        onclick={handleSave} 
+                        variant="brand"
+                        disabled={isSaving}>
+                    </lightning-button>
+                    <template if:true={isSaving}>
+                        <lightning-spinner alternative-text="Saving" variant="brand"></lightning-spinner>
+                    </template>
+                </div>
+                
+                <template if:true={showSuccessMessage}>
+                    <div class="slds-notify_container slds-is-relative">
+                        <div class="slds-notify slds-notify_alert slds-theme_success" role="alert">
+                            <span class="slds-assistive-text">Success</span>
+                            <span class="slds-icon_container slds-icon-utility-success slds-m-right_x-small">
+                                <lightning-icon icon-name="utility:success" size="x-small"></lightning-icon>
+                            </span>
+                            Receipts saved successfully!
+                        </div>
+                    </div>
+                </template>
+                
+                <template if:true={errorMessage}>
+                    <div class="slds-notify_container slds-is-relative">
+                        <div class="slds-notify slds-notify_alert slds-theme_error" role="alert">
+                            <span class="slds-assistive-text">Error</span>
+                            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small">
+                                <lightning-icon icon-name="utility:error" size="x-small"></lightning-icon>
+                            </span>
+                            {errorMessage}
+                        </div>
+                    </div>
+                </template>
+            </template>
+            
+            <template if:false={purchaseOrder}>
+                <p>Loading purchase order...</p>
+                <template if:true={loadingError}>
+                    <div class="slds-text-color_error">{loadingError}</div>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>
