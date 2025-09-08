@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AppMenu xmlns="http://soap.sforce.com/2006/04/metadata">
+    <appMenuItems>
+        <name>Purchase_Order__c</name>
+        <type>Tab</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>Purchase_Order_Line_Item__c</name>
+        <type>Tab</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>Ingredient__c</name>
+        <type>Tab</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>Account</name>
+        <type>Tab</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>updateQuantityReceived</name>
+        <type>Tab</type>
+    </appMenuItems>
+</AppMenu>

@@ -1,0 +1,53 @@
+<template>
+    <lightning-card title="Receive Purchase Order" icon-name="standard:purchase_order">
+        <div class="slds-var-m-around_medium">
+            <template if:true={purchaseOrder.data}>
+                <div class="slds-text-heading_medium slds-var-m-bottom_medium">
+                    PO: {purchaseOrder.data.Name} - Status: {purchaseOrder.data.Status__c}
+                </div>
+            </template>
+            
+            <template if:true={lineItems.data}>
+                <lightning-datatable
+                    data={lineItems.data}
+                    columns={columns}
+                    key-field="Id"
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+            
+            <template if:true={showSpinner}>
+                <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+            </template>
+            
+            <div class="slds-var-m-top_medium">
+                <lightning-button 
+                    label="Save" 
+                    onclick={handleSave} 
+                    variant="brand"
+                    disabled={saveDisabled}>
+                </lightning-button>
+            </div>
+            
+            <template if:true={errorMessage}>
+                <div class="slds-var-m-top_medium">
+                    <lightning-alert 
+                        header="Error" 
+                        message={errorMessage} 
+                        variant="error">
+                    </lightning-alert>
+                </div>
+            </template>
+            
+            <template if:true={successMessage}>
+                <div class="slds-var-m-top_medium">
+                    <lightning-alert 
+                        header="Success" 
+                        message={successMessage} 
+                        variant="success">
+                    </lightning-alert>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
