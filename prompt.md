@@ -1,6 +1,6 @@
-Eval Run ID: qwen3-qwen3
+Eval Run ID: qwen3-gemini-2.5-flash-lite
 Plan Model: Qwen3
-Act Model: Qwen3
+Act Model: Gemini 2.5 Flash Lite
 
 You are to generate a complete Salesforce application that implements a purchasing and inventory system for a **commercial baking company**. After reviewing the instructions, analyze the current org structure in the local file system. Ask me any clarifying questions.
 
